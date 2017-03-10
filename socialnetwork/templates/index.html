@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block staticstyle %}
+  {% load staticfiles %}
+    <script src="{% static 'js/global.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+{% block navbar %}
+  <ul class="nav nav-pills pull-right">
+    <li role="presentation"><a href="{% url 'follow_stream' %}">following only</a></li>
+    <li role="presentation"><a href="{% url 'logout' %}">sign out</a></li>
+  </ul>
+{% endblock %}
+      
+{% block jumbotron %}
+  <div class="post-box">
+    {% for error in errors %}
+      <div class="error">
+          <p>{{error}}</p>
+      </div>
+    {% endfor %}
+    <form class="add-form" action="{% url 'add_post' %}" method="post">
+      {{form}}
+      <br>
+      <button class="btn pull-right">contribute</button>
+      <input type="hidden" name="parent" value="">
+      {% csrf_token %}
+    </form>
+    <form action="{% url 'profile' %}" method="GET">     
+      <input type="hidden" name="user" value="{{request.user.username}}">
+      <input class="profile-link pull-left" type="submit" value="{{request.user.username}}"/>
+    </form>
+  </div>
+{% endblock %}
+
+
+{% block content %}
+  <div id="post-feed">
+  </div>
+  <!-- {% if posts %}
+    {% for post in posts %}
+    <div class="post-common">
+        <p>{{post.text}}</p>
+        <form action="{% url 'profile' %}" method="GET"> 
+          <input type="hidden" name="user" value="{{post.user}}">
+          <table>
+            <tr>
+              <td>
+              {% if post.user.profile.photo %}
+                <img src="{% url 'get_photo' post.user.profile.id %}" alt="photo failed to load" width="16px">
+              {% else %}
+                {% load static %}
+                <img src="{% static 'user_default.jpg' %}" alt="medium-rare pepe" width="16px">
+              {% endif %}
+              </td>
+              <td> | </td>
+              <td>#{{post.id}}</td>
+              <td> | </td>
+              <td><input class="plain" type="submit" value="{{post.user.username}}"/></td>
+              <td> | </td>
+              <td>{{post.datetime}}</td>
+            </tr>
+          </table>
+        </form>
+        <div class="comment-list">
+        </div>
+        <div class="post-box">
+          {% for error in errors %}
+            <div class="error">
+                <p>{{error}}</p>
+            </div>
+          {% endfor %}
+          <form class="add-form" action="{% url 'add_post' %}" method="post">
+            <table>
+            <tr>
+              <td>
+              {% for field in form.visible_fields %}
+              <div class="comment-box">{{field}}</div>
+              {% endfor %} 
+              </td>
+              <td>
+              <button class="btn comment-btn pull-right">comment</button>
+              </td>
+              <input type="hidden" name="parent" value="{{post.id}}">
+              {% csrf_token %}
+            </tr>
+            </table>
+          </form>
+        </div>
+    </div>
+    {% endfor %}
+  {% else %}
+    <h4 class="center-text">no comments yet</h4>
+  {% endif %} -->
+{% endblock %}

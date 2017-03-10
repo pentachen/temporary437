@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block staticstyle %}
+  {% load staticfiles %}
+    <script src="{% static 'js/profile.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+{% block title %} minimal | {{request.user.username}} {% endblock %}
+
+{% block navbar %}
+  <ul class="nav nav-pills pull-right">
+    {% if user %}
+      {% if request.user.username == user.username %}
+        <li role="presentation"><a href="{% url 'edit_profile' %}">edit profile</a></li>
+      {% endif %}
+    {% endif %}
+    <li role="presentation"><a href="{% url 'logout' %}">sign out</a></li>
+  </ul>
+{% endblock %}
+      
+{% block errors %}
+  {% for error in errors %}
+    <div id="error-messages" class="error">
+        {{error}}
+    </div>
+  {% endfor %}
+{% endblock %}
+
+{% block jumbotron %}
+  <div class="row">
+    <div class="col-lg-4">
+      {% if user %}
+        {% if user.profile.photo %}
+          <img src="{% url 'get_photo' user.id %}" alt="photo failed to load" width="200px">
+          <br>
+          <br>
+        {% else %}
+          {% load static %}
+          <img src="{% static 'user_default.jpg' %}" alt="medium-rare pepe" width="200px">
+          <br>
+          <br>
+        {% endif %}
+        {% if request.user.username != user.username %}
+          {% for field in form.visible_fields %}
+            {% for error in field.errors %} {{error}} {% endfor %}
+          {% endfor %}
+          {% if followed %}
+            <form action="{% url 'unfollow' user.profile.id %}" method="post">
+              <input type="hidden" name="followThis" value="{{user.username}}">
+              <input type="hidden" name="profile" value="{{request.user.username}}">
+              <button class="btn">unfollow</button>
+              {% csrf_token %}
+            </form>
+          {% else %}
+            <form action="{% url 'follow' user.profile.id %}" method="post">
+              <input type="hidden" name="followThis" value="{{user.username}}">
+              <input type="hidden" name="profile" value="{{request.user.username}}">
+              <button class="btn">follow</button>
+              {% csrf_token %}
+            </form>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    </div>
+    <div class="col-lg-8">
+      <div class="center-text">
+        {% if user %}
+          <h1 id="prof-username">{{user.username}}</h1>
+          <p>also known as {{user.first_name}} {{user.last_name}}</p>
+          <p class="smalltext">:: {{user.profile.bio}}</p>
+          {% if age %}
+            <p>{{age}} years old</p>
+          {% else %}
+            <p>no age info</p>
+          {% endif %}
+        {% else %}
+          <p>How did you get here?<br>
+             There seems to be an error.<br>
+             User not found.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block content %}
+  <div id="post-feed">
+  </div>
+  <!-- {% if posts %}
+    {% for post in posts %}
+    <div class="post-common">
+        <p>{{post.text}}</p>
+        <table>
+          <tr>
+            <td>#{{post.id}}</td>
+            <td> | </td>
+            <td>{{post.user}}</td>
+            <td> | </td>
+            <td>{{post.datetime}}</td>
+          </tr>
+        </table>
+    </div>
+    {% endfor %}
+  {% else %}
+    <h4 class="center-text">no posts yet</h4>
+  {% endif %} -->
+{% endblock %}

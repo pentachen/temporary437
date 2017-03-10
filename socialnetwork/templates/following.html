@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+
+{% block staticstyle %}
+  {% load staticfiles %}
+    <script src="{% static 'js/followers.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+{% block title %} minimal | your shipposting site {% endblock %}
+
+{% block navbar %}
+  <ul class="nav nav-pills pull-right">
+    <li role="presentation"><a href="{% url 'home' %}">global stream</a></li>
+    <li role="presentation"><a href="{% url 'logout' %}">sign out</a></li>
+  </ul>
+{% endblock %}
+
+{% block content %}
+  <div id="post-feed">
+  </div>
+  <!-- {% if posts %}
+    {% for post in posts %}
+    <div class="post-common">
+        <p>{{post.text}}</p>
+        <form action="{% url 'profile' %}" method="GET"> 
+          <input type="hidden" name="user" value="{{post.user}}">
+          <table>
+            <tr>
+              <td>#{{post.id}}</td>
+              <td> | </td>
+              <td><input class="plain" type="submit" value="{{post.user}}"/></td>
+              <td> | </td>
+              <td>{{post.datetime}}</td>
+            </tr>
+          </table>
+        </form>
+    </div>
+    {% endfor %}
+  {% else %}
+    <h4 class="center-text">you aren't following anyone</h4>
+  {% endif %} -->
+{% endblock %}

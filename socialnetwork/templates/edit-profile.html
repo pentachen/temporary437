@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %} minimal | {{request.user.username}} {% endblock %}
+
+{% block navbar %}
+  <ul class="nav nav-pills pull-right">
+    <li role="presentation"><a href="{% url 'logout' %}">sign out</a></li>
+  </ul>
+{% endblock %}
+      
+{% block errors %}
+  {% for error in errors %}
+    <div id="error-messages" class="error">
+        {{error}}
+    </div>
+  {% endfor %}
+{% endblock %}
+
+{% block jumbotron %}
+
+  <div class="row">
+    <div class="col-lg-4">
+      {% if user.profile.photo %}
+        <img src="{% url 'get_photo' user.id %}" alt="photo failed to display" width="200px">
+          <br>
+      {% else %}
+        {% load static %}
+        <img src="{% static 'user_default.jpg' %}" alt="medium-rare pepe" width="200px">
+          <br>
+      {% endif %}
+      <form enctype="multipart/form-data" action="{% url 'update_photo' %}" method="POST">
+        <table>
+          {% for field in form.visible_fields %}
+            <tr>
+                <td>{{field.label_tag}}</td>
+                <td>{{field}}</td>
+            </tr>
+            <tr>
+                {% for error in field.errors %} {{error}} {% endfor %}
+            </tr>
+          {% endfor %}
+          <tr><td colspan="3"><input class="btn signin-button" type="submit" value="change photo"></td></tr>
+        </table>
+        {% csrf_token %}
+      </form>
+    </div>
+    <div class="col-lg-8">
+      <form method="post" action="{% url 'update_profile' %}">
+        <input type="hidden" name="user" value="{{request.user.username}}">
+        <table class="centered">
+        {% for field in form1.visible_fields %}
+        {% for error in field.errors %} {{error}} {% endfor %}
+        <tr>
+          <td class="rightalign"><label>{{field.label_tag}}:</label></td>
+          <td>{{field}}</td>
+        </tr>
+        {% endfor %}  
+        {% for field in form2.visible_fields %}
+        {% for error in field.errors %} {{error}} {% endfor %}
+        <tr>
+          <td class="rightalign"><label>{{field.label_tag}}:</label></td>
+          <td>{{field}}</td>
+        </tr>
+        {% endfor %}  
+        {% for field in form3.visible_fields %}
+        {% for error in field.errors %} {{error}} {% endfor %}
+        <tr>
+          <td class="rightalign"><label>{{field.label_tag}}:</label></td>
+          <td>{{field}}</td>
+        </tr>
+        {% endfor %}  
+        </table>
+
+        <input class="btn signin-button" type="submit" value="update info" />
+        {% csrf_token %}
+      </form>
+    </div>
+  </div>
+{% endblock %}

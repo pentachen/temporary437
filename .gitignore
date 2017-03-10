@@ -1,0 +1,17 @@
+*.pyc
+*.pot
+*.pyc
+
+# Editor backup files
+*~
+*#
+*.swp
+
+# Django's SQL Lite Database File
+db.sqlite3
+
+# images
+images/
+
+# config
+config.ini

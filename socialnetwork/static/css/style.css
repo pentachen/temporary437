@@ -1,0 +1,215 @@
+/* Space out content a bit */
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: black;
+  color: #DDDDDD;
+  background: url("../background.png");
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/* Custom page header */
+.header {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e5e5e5;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+/* Custom things that I overwrote because reskin */
+a {
+  color: white;
+}
+
+.text-muted {
+  color: white;
+}
+
+.container .jumbotron {
+  background-color: #FFFFFF;
+  opacity: 0.78;
+  padding: 20px 30px 12px 30px;
+  border: 0px 0x 20px;
+  border-bottom: 15px solid teal;
+  color: black;
+}
+
+.btn {
+  background-color: #FFFFFF;
+  border: 1px solid black;
+  font-size: small;
+  padding: 6px 12px 7px 12px;
+  color: black;
+}
+
+.footer {
+  text-align: right;
+  color: #DDDDDD;
+}
+
+.signin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -66%);
+}
+
+.centered {
+  margin-left:auto; 
+  margin-right:auto;
+}
+
+.rightalign {
+  text-align: right;
+  padding-right: 5px;
+}
+
+.boxedinput {
+  border: 1px solid #555555;
+}
+
+.signin-button {
+  margin-top: 10px;
+}
+
+.post-box {
+  position: relative;
+  margin: auto;
+  overflow-y: auto;
+  width: 69%; /* {{crass-joke}} */
+}
+
+.post-area {
+  height: inherit;
+  width: 100%;
+  resize: vertical;
+}
+
+.post-common {
+  padding-bottom: 20px;
+  word-wrap: break-word;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.plain {
+  background: none;
+  color: #DDDDDD;
+  border: none;
+  padding: 0px 0px 0px 0px;
+}
+
+.profile-link {
+  background: none;
+  color: black;
+  border: none;
+  padding: 0px 0px 0px 0px;
+  margin-bottom: 15px;
+  font-size: 23px;
+  font-weight: 200;
+}
+
+.home-button {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  font-size: 26px;
+  font-weight: 300;
+}
+
+.home-button:hover{
+  color: teal;
+  text-decoration: none;
+}
+
+.jumbotron .smalltext {
+  font-size: 16px;
+}
+
+.comment-btn {
+  opacity: 0.7;
+  padding: 2px 5px 3px 5px;
+}
+
+.comment-box {
+  height: 24px;
+  color: #222222;
+  font-size: 12px;
+  overflow-y: hidden;
+  resize: none;
+}
+
+.comment-list {
+  width: 100%;
+}
+
+.shift-right {
+  padding-left: 40px;
+}
+
+.login-confirm {
+  color: black;
+}

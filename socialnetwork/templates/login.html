@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %} minimal | login {% endblock %}
+      
+{% block errors %}
+  {% if form.errors %}
+    <p id="error-messages" class="error">
+      Incorrect user name and password.
+    </p>
+  {% endif %}
+{% endblock %}
+
+{% block jumbotron %}        
+  <form method="post" action="{% url 'login' %}">
+    <table class="centered">
+    <tr>
+      <td class="rightalign">{{ form.username.label_tag }}</td>
+      <td>{{ form.username }}</td>
+    </tr>
+    <tr>
+      <td class="rightalign">{{ form.password.label_tag }}</td>
+      <td>{{ form.password }}</td>
+    </tr>
+    </table>
+
+    <input class="btn signin-button" type="submit" value="Login" />
+    <a class="btn signin-button" href="{% url 'register' %}">Register</a>
+    <input type="hidden" name="next" value="{{ next }}" />
+    {% csrf_token %}
+  </form>
+{% endblock %}
